@@ -24,14 +24,14 @@ button {
 }
 
 .market-map {
-  width: min(1180px, calc(100% - 40px));
+  width: min(960px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 68px 0 80px;
+  padding: 42px 0 56px;
 }
 
 .page-header {
   max-width: 650px;
-  margin-bottom: 54px;
+  margin: 0 auto 22px;
 }
 
 .eyebrow,
@@ -67,6 +67,149 @@ h1 {
   color: var(--muted);
   font-size: 18px;
   line-height: 1.55;
+}
+
+.layer-bands {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 18px;
+}
+
+.layer-bands::before {
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  left: 6px;
+  width: 2px;
+  background: linear-gradient(to bottom, #d98a77, #7da9c9 35%, #8fa99a 68%, #b1a07d);
+  content: '';
+  opacity: 0.6;
+}
+
+.layer-nav {
+  position: sticky;
+  z-index: 10;
+  top: 0;
+  display: flex;
+  gap: 0;
+  margin-bottom: 10px;
+  border: 1px solid var(--line);
+  background: rgba(244, 247, 249, 0.94);
+  box-shadow: 0 4px 12px rgba(23, 50, 77, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.layer-nav a {
+  flex: 1;
+  padding: 11px 12px 10px;
+  border-right: 1px solid var(--line);
+  color: var(--muted);
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.layer-nav a:last-child {
+  border-right: 0;
+}
+
+.layer-nav a:hover,
+.layer-nav a:focus-visible {
+  background: var(--panel);
+  color: var(--accent);
+}
+
+.layer-nav a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -3px;
+}
+
+.layer-band {
+  --layer-tint: #fdf4f0;
+  --layer-accent: #d98a77;
+  position: relative;
+  scroll-margin-top: 64px;
+  padding: 10px 12px 12px;
+  border-left: 3px solid var(--layer-accent);
+  background: var(--layer-tint);
+}
+
+.layer-band-2 {
+  --layer-tint: #f2f7fb;
+  --layer-accent: #7da9c9;
+}
+
+.layer-band-3 {
+  --layer-tint: #f3f8f4;
+  --layer-accent: #8fa99a;
+}
+
+.layer-band-4 {
+  --layer-tint: #faf7ef;
+  --layer-accent: #b1a07d;
+}
+
+.layer-band::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -8px;
+  width: 3px;
+  background: var(--layer-accent);
+  content: '';
+  opacity: 0.18;
+}
+
+.layer-band-header {
+  display: flex;
+  gap: 20px;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid color-mix(in srgb, var(--layer-accent) 35%, var(--line));
+}
+
+.layer-band-header h2 {
+  margin: 4px 0 0;
+  font-size: 23px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.layer-band-header > p {
+  max-width: 360px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: right;
+}
+
+.layer-band .subsector-grid::before {
+  background: color-mix(in srgb, var(--layer-accent) 40%, var(--line));
+}
+
+.layer-band .subsector-card:hover,
+.layer-band .subsector-card:focus-visible {
+  border-color: var(--layer-accent);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--layer-accent) 20%, transparent);
+}
+
+.layer-band .subsector-card:active {
+  box-shadow: 0 2px 7px color-mix(in srgb, var(--layer-accent) 24%, transparent);
+  transform: translateY(0);
+}
+
+/* Keep the band header compact while preserving the existing tree treatment. */
+.layer-band > .layer-band-header + .subsector-section-grid {
+  margin-top: 0;
 }
 
 .tree {
@@ -105,8 +248,12 @@ h1 {
 .subsector-grid {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.subsector-section-grid {
+  min-width: 0;
 }
 
 .subsector-grid::before {
@@ -121,8 +268,8 @@ h1 {
 
 .subsector-card {
   position: relative;
-  min-height: 146px;
-  padding: 26px 18px 18px;
+  min-height: 88px;
+  padding: 17px 12px 12px;
   border: 1px solid var(--line);
   border-radius: 0;
   background: var(--panel);
@@ -137,7 +284,7 @@ h1 {
   top: 0;
   left: 50%;
   width: 1px;
-  height: 26px;
+  height: 16px;
   background: var(--line);
   content: '';
 }
@@ -147,6 +294,11 @@ h1 {
   border-color: var(--accent);
   box-shadow: 0 8px 20px rgba(23, 50, 77, 0.08);
   transform: translateY(-3px);
+}
+
+.subsector-card:active {
+  box-shadow: 0 2px 7px rgba(23, 50, 77, 0.1);
+  transform: translateY(0);
 }
 
 .subsector-card:focus-visible {
@@ -161,85 +313,192 @@ h1 {
 
 .card-index {
   display: block;
-  margin-bottom: 24px;
+  margin-bottom: 10px;
   color: var(--muted);
 }
 
 .card-name {
   display: block;
-  max-width: 145px;
-  font-size: 17px;
+  max-width: 160px;
+  font-size: 14px;
   line-height: 1.18;
 }
 
 .card-arrow {
   position: absolute;
-  right: 16px;
-  bottom: 15px;
+  right: 10px;
+  bottom: 9px;
   color: var(--accent);
   font-family: 'Courier New', monospace;
 }
 
-.detail-panel {
-  display: grid;
-  grid-template-columns: 0.9fr 1.6fr;
-  gap: 50px;
-  margin-top: 48px;
-  padding: 36px 40px;
-  border-top: 3px solid var(--accent);
-  background: var(--panel);
+.subsector-page {
+  width: min(980px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 48px 0 80px;
 }
 
-.detail-heading h2 {
-  margin: 9px 0 0;
+.subsector-header {
+  padding-bottom: 58px;
+  border-bottom: 1px solid var(--line);
+}
+
+.back-button {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 58px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.back-button:hover,
+.back-button:focus-visible {
+  color: var(--accent);
+}
+
+.back-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+
+.subsector-header h1 {
+  max-width: 700px;
+  margin-bottom: 0;
+}
+
+.subsector-section {
+  padding: 48px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-heading {
+  display: flex;
+  gap: 18px;
+  align-items: baseline;
+  margin-bottom: 26px;
+}
+
+.section-heading .eyebrow {
+  color: var(--accent);
+}
+
+.section-heading h2 {
+  margin: 0;
   font-size: 32px;
   font-weight: 500;
   letter-spacing: -0.03em;
   line-height: 1.1;
 }
 
-.detail-content {
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: 34px;
-}
-
-.detail-label {
-  margin-bottom: 15px;
-  color: var(--muted);
-}
-
-.company-list {
+.company-cards {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  flex-direction: column;
+  gap: 0;
 }
 
-.company-list li {
-  padding: 8px 11px;
+.company-card {
+  display: grid;
+  grid-template-columns: 0.65fr 1.35fr auto;
+  gap: 28px;
+  align-items: center;
+  padding: 20px 0;
   border: 1px solid var(--line);
+  border-bottom: 0;
+  background: var(--panel);
+}
+
+.company-card:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.company-card h3,
+.company-card p {
+  margin: 0;
+}
+
+.company-card h3 {
+  padding-left: 20px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.company-card p {
+  color: var(--muted);
   font-size: 15px;
+  line-height: 1.45;
 }
 
-.trend-note {
-  padding-left: 26px;
-  border-left: 1px solid var(--line);
+.company-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-right: 20px;
+  color: var(--muted);
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  text-align: right;
+  text-transform: uppercase;
 }
 
-.trend-note > p:last-child {
-  margin-bottom: 0;
+.company-meta span:first-child {
+  color: var(--accent);
+}
+
+.funding-list {
+  border-top: 1px solid var(--line);
+}
+
+.funding-row {
+  display: grid;
+  grid-template-columns: 1.2fr 0.7fr 1fr 1fr;
+  gap: 20px;
+  padding: 17px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+}
+
+.funding-row strong {
+  color: var(--ink);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.funding-row time {
+  text-align: right;
+}
+
+.empty-state {
+  margin: 0;
   color: var(--muted);
   font-size: 17px;
+}
+
+.trend-section {
+  border-bottom: 0;
+}
+
+.trend-copy {
+  max-width: 720px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 22px;
   line-height: 1.55;
 }
 
 @media (max-width: 900px) {
   .subsector-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 8px;
   }
 
   .subsector-grid::before {
@@ -258,7 +517,46 @@ h1 {
   }
 
   .page-header {
-    margin-bottom: 38px;
+    margin-bottom: 26px;
+  }
+
+  .layer-bands {
+    gap: 12px;
+    padding-left: 16px;
+  }
+
+  .layer-bands::before {
+    left: 2px;
+  }
+
+  .layer-nav {
+    overflow-x: auto;
+    margin-bottom: 12px;
+  }
+
+  .layer-nav a {
+    min-width: 120px;
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  .layer-band {
+    padding: 15px 12px 16px;
+    scroll-margin-top: 54px;
+  }
+
+  .layer-band-header {
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .layer-band-header h2 {
+    font-size: 28px;
+  }
+
+  .layer-band-header > p {
+    margin-top: 8px;
+    text-align: left;
   }
 
   .root-node {
@@ -266,9 +564,7 @@ h1 {
     min-width: 0;
   }
 
-  .subsector-grid,
-  .detail-panel,
-  .detail-content {
+  .subsector-grid {
     grid-template-columns: 1fr;
   }
 
@@ -276,16 +572,54 @@ h1 {
     min-height: 125px;
   }
 
-  .detail-panel {
-    gap: 32px;
-    margin-top: 34px;
-    padding: 28px 24px;
+  .subsector-page {
+    width: min(100% - 28px, 500px);
+    padding: 30px 0 56px;
   }
 
-  .trend-note {
-    padding-top: 26px;
+  .subsector-header {
+    padding-bottom: 40px;
+  }
+
+  .back-button {
+    margin-bottom: 42px;
+  }
+
+  .subsector-section {
+    padding: 36px 0;
+  }
+
+  .section-heading h2 {
+    font-size: 28px;
+  }
+
+  .company-card {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 18px;
+  }
+
+  .company-card h3 {
     padding-left: 0;
-    border-top: 1px solid var(--line);
-    border-left: 0;
+  }
+
+  .company-meta {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 0;
+    text-align: left;
+  }
+
+  .funding-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 14px;
+  }
+
+  .funding-row time {
+    text-align: left;
+  }
+
+  .trend-copy {
+    font-size: 19px;
   }
 }
